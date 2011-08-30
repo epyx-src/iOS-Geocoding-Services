@@ -1,0 +1,18 @@
+# General
+.DS_Store
+
+# Eclipse
+.settings/
+
+# Java
+target/
+classes/
+
+# xcode noise
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+build
+**/*xcodeproj/xcuserdata
+**/*xcodeproj/project.xcworkspace
