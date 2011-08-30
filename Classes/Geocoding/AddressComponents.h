@@ -34,8 +34,9 @@
 
 
 #import <CoreLocation/CoreLocation.h>
+#import <MapKit/MapKit.h>
 
-@interface AddressComponents : NSObject {
+@interface AddressComponents : NSObject<MKAnnotation> {
 	NSString *title;
 	NSString *fullAddress;
 	NSString *streetNumber;

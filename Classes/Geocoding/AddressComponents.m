@@ -58,7 +58,6 @@
 	return [[array objectAtIndex:index] valueForKey:type];
 }
 
-
 - (void)dealloc{
 	[title release];
 	[fullAddress release];
@@ -69,6 +68,12 @@
 	[postalCode release];
 	[countryName release];
 	[super dealloc];
+}
+
+#pragma mark - MKAnnotation protocol
+
+- (NSString *)subtitle{
+    return self.fullAddress;
 }
 
 @end
