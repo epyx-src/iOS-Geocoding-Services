@@ -14,5 +14,5 @@ classes/
 *.mode2v3
 *.perspectivev3
 build
-**/*xcodeproj/xcuserdata
-**/*xcodeproj/project.xcworkspace
+**/*xcuserdata
+**/*.xcworkspace
