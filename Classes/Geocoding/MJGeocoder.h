@@ -40,12 +40,9 @@
 @protocol MJGeocoderDelegate;
 
 @interface MJGeocoder : NSObject {
-	id <MJGeocoderDelegate> delegate;
-	NSMutableArray *results;
 }
 
 @property (nonatomic, assign) id <MJGeocoderDelegate> delegate;
-@property (nonatomic, readonly) NSMutableArray *results;
 
 
 - (void)findLocationsWithAddress:(NSString *)address title:(NSString *)title;
