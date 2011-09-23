@@ -69,7 +69,8 @@
         
         //get response
         NSString *geocodingResponse = [NSString stringWithContentsOfURL:requestURL encoding:NSUTF8StringEncoding error:nil];
-        
+        [requestURL release];
+
         //result as dictionary dictionary
         NSDictionary *resultDict = [geocodingResponse JSONValue];
         
@@ -104,7 +105,7 @@
             });
         } else {
             //if status code is not OK
-            NSError *error;
+            NSError *error = nil;
             
             if([status isEqualToString:@"ZERO_RESULTS"]) {
                 error = [NSError errorWithDomain:@"MJGeocoderError" code:1 userInfo:nil];

@@ -85,7 +85,7 @@
             });
         } else {
             //if status code is not OK
-            NSError *error;
+            NSError *error = nil;
             
             if([status isEqualToString:@"ZERO_RESULTS"]){
                 error = [NSError errorWithDomain:@"MJGeocoderError" code:1 userInfo:nil];
