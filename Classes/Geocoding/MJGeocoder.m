@@ -34,22 +34,17 @@
 
 #import "MJGeocoder.h"
 #import "JSON.h"
-@interface MJGeocoder ()
-@property (nonatomic, retain) NSMutableArray *results;
-@end
 
 @implementation MJGeocoder
 
 @synthesize delegate;
-@synthesize results=_results;
 
 - (void)dealloc
 {
-    [_results release];
-    
+    self.delegate = nil;
+
     [super dealloc];
 }
-
 
 /*
  *	Calls Google's JSON Geocoding Service, builds a table of AddressComponents objects,
@@ -78,7 +73,7 @@
         if([status isEqualToString:@"OK"]){
             //if successful, build results array
             NSArray *foundLocations = [resultDict objectForKey:@"results"];
-            self.results = [NSMutableArray arrayWithCapacity:[foundLocations count]];
+            NSMutableArray *results = [NSMutableArray arrayWithCapacity:[foundLocations count]];
             
             [foundLocations enumerateObjectsUsingBlock:^(id location, NSUInteger index, BOOL *stop) {
                 NSArray *firstResultAddress = [location objectForKey:@"address_components"];
@@ -97,11 +92,11 @@
                 CLLocationCoordinate2DMake([[[[location objectForKey:@"geometry"] objectForKey:@"location"] valueForKey:@"lat"] doubleValue],
                                            [[[[location objectForKey:@"geometry"] objectForKey:@"location"] valueForKey:@"lng"] doubleValue]);
                 
-                [self.results addObject:resultAddress];
+                [results addObject:resultAddress];
             }];
             
             dispatch_async(dispatch_get_main_queue(), ^{
-                [delegate geocoder:self didFindLocations:self.results];
+                [delegate geocoder:self didFindLocations:results];
             });
         } else {
             //if status code is not OK
