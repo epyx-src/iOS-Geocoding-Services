@@ -38,13 +38,24 @@
 
 @implementation AddressComponents
 
-@synthesize title, fullAddress, streetNumber, route, city, stateCode, postalCode, countryName, coordinate;
+@synthesize title, fullAddress, streetNumber, route, city, stateCode, postalCode, countryName, visualMark, coordinate;
 
++ (AddressComponents *)addressComponentsForTitle:(NSString *)aTitle visualMark:(NSString *)aVisualMark coordinate:(CLLocationCoordinate2D)aCoordinate
+{
+    AddressComponents *newAdr = [[AddressComponents alloc] init];
+
+    newAdr.title = aTitle;
+    newAdr.visualMark = aVisualMark;
+    newAdr.coordinate = aCoordinate;
+
+    return [newAdr autorelease];
+}
 
 /*
  *	Finds an address component of a specific type inside the given address components array
  */
-+ (NSString *)addressComponent:(NSString *)component inAddressArray:(NSArray *)array ofType:(NSString *)type{
++ (NSString *)addressComponent:(NSString *)component inAddressArray:(NSArray *)array ofType:(NSString *)type
+{
 	int index = [array indexOfObjectPassingTest:^(id obj, NSUInteger idx, BOOL *stop){
 		if([(NSString *)([[obj objectForKey:@"types"] objectAtIndex:0]) isEqualToString:component]){
 			return YES;
@@ -58,7 +69,8 @@
 	return [[array objectAtIndex:index] valueForKey:type];
 }
 
-- (void)dealloc{
+- (void)dealloc
+{
 	[title release];
 	[fullAddress release];
 	[streetNumber release];
@@ -67,12 +79,14 @@
 	[stateCode release];
 	[postalCode release];
 	[countryName release];
+    [visualMark release];
 	[super dealloc];
 }
 
 #pragma mark - MKAnnotation protocol
 
-- (NSString *)subtitle{
+- (NSString *)subtitle
+{
     return self.fullAddress;
 }
 

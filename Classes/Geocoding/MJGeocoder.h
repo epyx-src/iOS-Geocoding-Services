@@ -45,6 +45,7 @@
 @property (nonatomic, assign) id <MJGeocoderDelegate> delegate;
 
 
+- (void)findLocationsWithAddress:(NSString *)address title:(NSString *)title visualMark:(NSString *)visualMark;
 - (void)findLocationsWithAddress:(NSString *)address title:(NSString *)title;
 
 @end

@@ -53,8 +53,13 @@
  *  address: address to geocode
  *  title: custom title for location (useful for passing an annotation title on through the AddressComponents object)
  */
-- (void)findLocationsWithAddress:(NSString *)address title:(NSString *)title{
-    
+- (void)findLocationsWithAddress:(NSString *)address title:(NSString *)title
+{
+    [self findLocationsWithAddress:address title:title visualMark:nil];
+}
+
+- (void)findLocationsWithAddress:(NSString *)address title:(NSString *)title visualMark:(NSString *)visualMark
+{
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         //build url string using address query
         NSString *urlString = [NSString stringWithFormat:@"http://maps.googleapis.com/maps/api/geocode/json?address=%@&sensor=true", address];
@@ -79,6 +84,7 @@
                 NSArray *firstResultAddress = [location objectForKey:@"address_components"];
                 
                 AddressComponents *resultAddress = [[[AddressComponents alloc] init] autorelease];
+                resultAddress.visualMark = visualMark;
                 resultAddress.title = title;
                 resultAddress.fullAddress = [location valueForKey:@"formatted_address"];
                 resultAddress.streetNumber = [AddressComponents addressComponent:@"street_number" inAddressArray:firstResultAddress ofType:@"long_name"];
@@ -118,6 +124,5 @@
         }
     });
 }
-
 
 @end
