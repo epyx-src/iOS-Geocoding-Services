@@ -38,14 +38,16 @@
 
 @implementation AddressComponents
 
-@synthesize title, fullAddress, streetNumber, route, city, stateCode, postalCode, countryName, visualMark, coordinate;
+@synthesize title, fullAddress, streetNumber, route, city, stateCode, postalCode, countryName, visualMark, isSelected, coordinate;
 
-+ (AddressComponents *)addressComponentsForTitle:(NSString *)aTitle visualMark:(NSString *)aVisualMark coordinate:(CLLocationCoordinate2D)aCoordinate
++ (AddressComponents *)addressComponentsForTitle:(NSString *)aTitle visualMark:(NSString *)aVisualMark isSelected:(BOOL)isSelected
+                                      coordinate:(CLLocationCoordinate2D)aCoordinate;
 {
     AddressComponents *newAdr = [[AddressComponents alloc] init];
 
     newAdr.title = aTitle;
     newAdr.visualMark = aVisualMark;
+    newAdr.isSelected = isSelected;
     newAdr.coordinate = aCoordinate;
 
     return [newAdr autorelease];

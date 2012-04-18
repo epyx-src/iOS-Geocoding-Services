@@ -46,6 +46,7 @@
 	NSString *postalCode;
 	NSString *countryName;
     NSString *visualMark;
+    BOOL isSelected;
 	CLLocationCoordinate2D coordinate;
 }
 
@@ -58,9 +59,11 @@
 @property (nonatomic, copy) NSString *postalCode;
 @property (nonatomic, copy) NSString *countryName;
 @property (nonatomic, copy) NSString *visualMark;
+@property (nonatomic, assign) BOOL isSelected;
 @property (nonatomic, assign) CLLocationCoordinate2D coordinate;
 
-+ (AddressComponents *)addressComponentsForTitle:(NSString *)aTitle visualMark:(NSString *)aVisualMark coordinate:(CLLocationCoordinate2D)aCoordinate;
++ (AddressComponents *)addressComponentsForTitle:(NSString *)aTitle visualMark:(NSString *)aVisualMark isSelected:(BOOL)isSelected
+                                      coordinate:(CLLocationCoordinate2D)aCoordinate;
 
 + (NSString *)addressComponent:(NSString *)component inAddressArray:(NSArray *)array ofType:(NSString *)type;
 

@@ -55,10 +55,10 @@
  */
 - (void)findLocationsWithAddress:(NSString *)address title:(NSString *)title
 {
-    [self findLocationsWithAddress:address title:title visualMark:nil];
+    [self findLocationsWithAddress:address title:title visualMark:nil isSelected:NO];
 }
 
-- (void)findLocationsWithAddress:(NSString *)address title:(NSString *)title visualMark:(NSString *)visualMark
+- (void)findLocationsWithAddress:(NSString *)address title:(NSString *)title visualMark:(NSString *)visualMark isSelected:(BOOL)isSelected
 {
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         //build url string using address query
@@ -84,6 +84,7 @@
                 NSArray *firstResultAddress = [location objectForKey:@"address_components"];
                 
                 AddressComponents *resultAddress = [[[AddressComponents alloc] init] autorelease];
+                resultAddress.isSelected = isSelected;
                 resultAddress.visualMark = visualMark;
                 resultAddress.title = title;
                 resultAddress.fullAddress = [location valueForKey:@"formatted_address"];
