@@ -38,20 +38,7 @@
 
 @implementation AddressComponents
 
-@synthesize title, fullAddress, streetNumber, route, city, stateCode, postalCode, countryName, visualMark, isSelected, coordinate;
-
-+ (AddressComponents *)addressComponentsForTitle:(NSString *)aTitle visualMark:(NSString *)aVisualMark isSelected:(BOOL)isSelected
-                                      coordinate:(CLLocationCoordinate2D)aCoordinate;
-{
-    AddressComponents *newAdr = [[AddressComponents alloc] init];
-
-    newAdr.title = aTitle;
-    newAdr.visualMark = aVisualMark;
-    newAdr.isSelected = isSelected;
-    newAdr.coordinate = aCoordinate;
-
-    return [newAdr autorelease];
-}
+@synthesize title, fullAddress, streetNumber, route, city, stateCode, postalCode, countryName, coordinate;
 
 /*
  *	Finds an address component of a specific type inside the given address components array
@@ -81,7 +68,6 @@
 	[stateCode release];
 	[postalCode release];
 	[countryName release];
-    [visualMark release];
 	[super dealloc];
 }
 

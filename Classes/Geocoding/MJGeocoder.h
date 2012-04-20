@@ -32,10 +32,7 @@
  *
  */
 
-
-
 #import <CoreLocation/CoreLocation.h>
-#import "AddressComponents.h"
 
 @protocol MJGeocoderDelegate;
 
@@ -43,7 +40,6 @@
 
 @property (nonatomic, assign) id <MJGeocoderDelegate> delegate;
 
-- (void)findLocationsWithAddress:(NSString *)address title:(NSString *)title visualMark:(NSString *)visualMark isSelected:(BOOL)isSelected;
 - (void)findLocationsWithAddress:(NSString *)address title:(NSString *)title;
 
 @end

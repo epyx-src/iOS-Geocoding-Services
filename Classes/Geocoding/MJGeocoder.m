@@ -33,6 +33,7 @@
  */
 
 #import "MJGeocoder.h"
+#import "AddressComponents.h"
 #import "JSON.h"
 
 @implementation MJGeocoder
@@ -54,11 +55,6 @@
  *  title: custom title for location (useful for passing an annotation title on through the AddressComponents object)
  */
 - (void)findLocationsWithAddress:(NSString *)address title:(NSString *)title
-{
-    [self findLocationsWithAddress:address title:title visualMark:nil isSelected:NO];
-}
-
-- (void)findLocationsWithAddress:(NSString *)address title:(NSString *)title visualMark:(NSString *)visualMark isSelected:(BOOL)isSelected
 {
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         //build url string using address query
@@ -84,8 +80,6 @@
                 NSArray *firstResultAddress = [location objectForKey:@"address_components"];
                 
                 AddressComponents *resultAddress = [[[AddressComponents alloc] init] autorelease];
-                resultAddress.isSelected = isSelected;
-                resultAddress.visualMark = visualMark;
                 resultAddress.title = title;
                 resultAddress.fullAddress = [location valueForKey:@"formatted_address"];
                 resultAddress.streetNumber = [AddressComponents addressComponent:@"street_number" inAddressArray:firstResultAddress ofType:@"long_name"];
